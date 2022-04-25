@@ -1,9 +1,10 @@
 import cv2
 from cv2 import sort
-cap = cv2.VideoCapture("eye_motion.mp4")
+cap = cv2.VideoCapture(0)
 
 while True:
     ret, frame = cap.read()
+    frame=cv2.flip(frame,1)
     if ret is False:
         break
 
@@ -18,7 +19,7 @@ while True:
     for cnt in contours:
         (x, y, w, h) = cv2.boundingRect(cnt)
         cv2.rectangle(roi, (x, y), (x+w, y+h), (255, 0, 0), 2)
-        cv2.line(roi, (x, int(w/2), 0), (x+int(w/2), rows), (0, 255, 0), 2)
+        cv2.line(roi, (x, int(w/2)), (x+int(w/2), rows), (0, 255, 0), 2)
         cv2.line(roi, (0, y+int(h/2)), (cols, y+int(h/2)), (0, 255, 0), 2)
         break
 
